@@ -3,9 +3,9 @@ use bevy::prelude::*;
 pub mod onclick;
 
 pub mod prelude {
-    pub use crate::UiExtrasPlugin;
-    pub use crate::UiDisabled;
     pub use crate::onclick::OnClick;
+    pub use crate::UiDisabled;
+    pub use crate::UiExtrasPlugin;
 }
 
 pub struct UiExtrasPlugin;
@@ -13,8 +13,7 @@ pub struct UiExtrasPlugin;
 impl Plugin for UiExtrasPlugin {
     fn build(&self, app: &mut App) {
         app.add_system(
-            crate::onclick::onclick_run_behaviors
-                .in_set(crate::onclick::ClickHandlerSet)
+            crate::onclick::onclick_run_behaviors.in_set(crate::onclick::ClickHandlerSet),
         );
     }
 }

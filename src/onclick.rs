@@ -27,9 +27,13 @@ impl OnClick {
     }
     /// Run a system when the UI node is clicked
     pub fn system<S, Param>(mut self, system: S) -> OnClick
-        where S: IntoSystem<(), (), Param>
+    where
+        S: IntoSystem<(), (), Param>,
     {
-        self.actions.push(ClickBehaviorKind::System(false, Some(Box::new(IntoSystem::into_system(system)))));
+        self.actions.push(ClickBehaviorKind::System(
+            false,
+            Some(Box::new(IntoSystem::into_system(system))),
+        ));
         self
     }
     /// Run an "entity system" when the UI node is clicked
@@ -37,9 +41,13 @@ impl OnClick {
     /// Your system will be provided the `Entity` ID of the entity that was clicked,
     /// allowing you to query for additional data on the current entity.
     pub fn entity_system<S, Param>(mut self, system: S) -> OnClick
-        where S: IntoSystem<Entity, (), Param>
+    where
+        S: IntoSystem<Entity, (), Param>,
     {
-        self.actions.push(ClickBehaviorKind::EntitySystem(false, Some(Box::new(IntoSystem::into_system(system)))));
+        self.actions.push(ClickBehaviorKind::EntitySystem(
+            false,
+            Some(Box::new(IntoSystem::into_system(system))),
+        ));
         self
     }
 
@@ -55,7 +63,7 @@ pub(crate) fn onclick_run_behaviors(
     world: &mut World,
     query: &mut QueryState<
         (Entity, &Interaction, &mut OnClick),
-        (Changed<Interaction>, Without<UiDisabled>)
+        (Changed<Interaction>, Without<UiDisabled>),
     >,
 ) {
     let mut behaviors: HashMap<Entity, Vec<ClickBehaviorKind>> = Default::default();
