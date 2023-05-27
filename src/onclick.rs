@@ -70,6 +70,7 @@ pub(crate) fn onclick_run_behaviors(
             match action {
                 #[cfg(feature = "iyes_cli")]
                 ClickBehaviorKind::Cli(cli) => {
+                    use iyes_cli::prelude::*;
                     world.run_clicommand(cli);
                 }
                 ClickBehaviorKind::System(initted, system_opt) => {
