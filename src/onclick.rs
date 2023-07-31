@@ -68,7 +68,7 @@ pub(crate) fn onclick_run_behaviors(
 ) {
     let mut behaviors: HashMap<Entity, Vec<ClickBehaviorKind>> = Default::default();
     for (entity, interaction, mut behavior) in query.iter_mut(world) {
-        if *interaction == Interaction::Clicked {
+        if *interaction == Interaction::Pressed {
             let behavior = behavior.bypass_change_detection();
             behaviors.insert(entity, core::mem::take(&mut behavior.actions));
         }
@@ -88,7 +88,7 @@ pub(crate) fn onclick_run_behaviors(
                             *initted = true;
                         }
                         system.run((), world);
-                        system.apply_buffers(world);
+                        system.apply_deferred(world);
                         *system_opt = Some(system);
                     }
                 }
@@ -99,7 +99,7 @@ pub(crate) fn onclick_run_behaviors(
                             *initted = true;
                         }
                         system.run(entity, world);
-                        system.apply_buffers(world);
+                        system.apply_deferred(world);
                         *system_opt = Some(system);
                     }
                 }

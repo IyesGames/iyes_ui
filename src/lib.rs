@@ -12,7 +12,7 @@ pub struct UiExtrasPlugin;
 
 impl Plugin for UiExtrasPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(
+        app.add_systems(Update,
             crate::onclick::onclick_run_behaviors.in_set(crate::onclick::ClickHandlerSet),
         );
     }
