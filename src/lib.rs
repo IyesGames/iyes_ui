@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 
 pub mod onclick;
+#[cfg(feature = "bevy_fluent")]
+pub mod locale;
 
 pub mod prelude {
     pub use crate::onclick::OnClick;

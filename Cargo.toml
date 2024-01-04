@@ -15,3 +15,7 @@ features = [
 [dependencies.iyes_cli]
 git = "https://github.com/IyesGames/iyes_cli"
 optional = true
+
+[dependencies.bevy_fluent]
+version = "0.7.0"
+optional = true
